@@ -1,6 +1,6 @@
 {
   "name" : "redis-stream2",
-  "version" : "1.0.0",
+  "version" : "1.0.1",
   "description" : "create arbitrary node.js streams to and from redis",
   "main" : "index.js",
   "bin" : {},
