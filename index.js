@@ -16,8 +16,13 @@ function Redis (options) {
 
   // setting up connection options
   const cnxOptions = {
-    ...options
+    ...options,
+    tlsConnection: false
   };
+
+  for (const tlsOption in options.tls) {
+    cnxOptions[tlsOption] = options.tls[tlsOption];
+  }
 
   cnxOptions.family = (!options.family && net.isIP(this.host)) || (options.family === 'IPv6' ? 6 : 4);
 
@@ -29,7 +34,12 @@ function Redis (options) {
 Redis.es = es
 
 Redis.prototype.createConnection = function () {
-  return net.createConnection(this.connectionOptions);
+  console.log(this.connectionOptions);
+  if (this.connectionOptions.tlsConnection) {
+    return tls.connect(this.connectionOptions);
+  } else {
+    return net.createConnection(this.connectionOptions);
+  }
 }
 
 Redis.prototype.stream = function (cmd, key, curry /* moar? */) {
