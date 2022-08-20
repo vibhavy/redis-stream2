@@ -1,16 +1,21 @@
 # redis-stream
 
-Create readable/writeable/pipeable [api compatible streams](http://nodejs.org/api/stream.html) from redis commands.
+This Package is a fork of github project "redis-stream". The main motive behind creating this package was to add the feature to connect cloud redis (currently tested with Azure), which was not availble in the original package.
 
-[![Build Status](https://secure.travis-ci.org/tblobaum/redis-stream.png)](http://travis-ci.org/tblobaum/redis-stream)
+# redis-stream
+
+Create readable/writeable/pipeable [api compatible streams](http://nodejs.org/api/stream.html) from redis commands.
 
 # Example
 
 In the `example` directory there are various ways to use `redis-stream` -- such as creating a stream from the redis `monitor` command.
 
 ``` js
-var Redis = require('redis-stream')
-  , client = new Redis(6379, 'localhost')
+const Redis = require('redis-stream');
+const client = new Redis({
+  port: 6379, 
+  host: 'localhost'
+});
 
 require('http')
 .createServer(function (request, response) {
@@ -23,17 +28,27 @@ require('http')
 
 # Methods
 
+## Local Connection
 ``` js
-var Redis = require('redis-stream')
-  , client = new Redis(6379, localhost, 0)
+const Redis = require('redis-stream')
+const client = new Redis({
+  port: 6379, 
+  host: 'localhost', 
+  db: 0
+});
 ```
 
-## new Redis([port] [, host] [, database])
-Return an object that streams can be created from with the `port`, `host`, and `database` options.
+## Cloud Connection
 
-* `port` defaults to `6379` 
-* `host` defaults to `localhsot` 
-* `database` defaults to `0`
+### Azure
+``` js
+const Redis = require('redis-stream')
+const client = new Redis({
+  port: 6380, 
+  host: '<redis-cloud-url>', 
+  auth: '<auth-pass-key>'
+});
+```
 
 ## client.stream([arg1] [, arg2] [, argn])
 Return an instance of [stream](http://nodejs.org/api/streams.html). All calls to `write` on this stream will be prepended with the optional arguments passed to `client.stream()`
@@ -95,15 +110,11 @@ stream.end()
 
 `npm install redis-stream`
 
-# Tests
-
-`npm install -g tap && npm test`
-
 # License
 
 (The MIT License)
 
-Copyright (c) 2012 Thomas Blobaum <tblobaum@gmail.com>
+Copyright (c) 2012 Vibhav Yadav <vyadav@frontrol.com>
 
 Permission is hereby granted, free of charge, to any person obtaining
 a copy of this software and associated documentation files (the

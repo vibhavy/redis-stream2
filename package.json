@@ -1,6 +1,6 @@
 {
-  "name" : "redis-stream",
-  "version" : "0.1.0",
+  "name" : "redis-stream2",
+  "version" : "1.0.0",
   "description" : "create arbitrary node.js streams to and from redis",
   "main" : "index.js",
   "bin" : {},
@@ -19,17 +19,18 @@
   },
   "repository" : {
     "type" : "git",
-    "url" : "git://github.com/tblobaum/redis-stream.git"
+    "url" : "git://github.com/vibhavy/redis-stream2"
   },
-  "homepage" : "https://github.com/tblobaum/redis-stream",
+  "homepage" : "https://github.com/vibhavy/redis-stream2",
   "keywords" : [
     "redis",
-    "stream"
+    "stream",
+    "stream2"
   ],
   "author" : {
-    "name" : "Thomas Blobaum",
-    "email" : "tblobaum@gmail.com",
-    "url" : "https://github.com/tblobaum/"
+    "name" : "Vibhav Yadav",
+    "email" : "vyadav@frontrol.in",
+    "url" : "https://github.com/vyadav/"
   },
   "license" : "MIT"
 }

@@ -1,4 +1,5 @@
 var net = require('net')
+  , tls = require('tls')
   , util = require('util')
   , es = require('event-stream')
   , formatString1 = '*%d\r\n'
@@ -6,10 +7,21 @@ var net = require('net')
   , replace1 = /^\$[0-9]+/
   , replace2 = /^\*[0-9]+|^\:|^\+|^\$|^\r\n$/
 
-function Redis (port, host, db, auth) { 
-  this.port = port || 6379
-  this.host = host || 'localhost'
-  this.db = String(db || 0)
+function Redis (options) {
+  this.options = options; 
+  this.port = options.port || 6379
+  this.host = options.host || 'localhost'
+  this.db = String(options.db || 0)
+  this.auth = options.auth || ''
+
+  // setting up connection options
+  const cnxOptions = {
+    ...options
+  };
+
+  cnxOptions.family = (!options.family && net.isIP(this.host)) || (options.family === 'IPv6' ? 6 : 4);
+
+  this.connectionOptions = cnxOptions;
   return this
 }
 
@@ -17,7 +29,7 @@ function Redis (port, host, db, auth) {
 Redis.es = es
 
 Redis.prototype.createConnection = function () {
-  return net.createConnection(this.port, this.host)
+  return net.createConnection(this.connectionOptions);
 }
 
 Redis.prototype.stream = function (cmd, key, curry /* moar? */) {
@@ -44,6 +56,7 @@ Redis.prototype.stream = function (cmd, key, curry /* moar? */) {
     ;
   stream.curry = curry 
   stream.redis = _redis
+  stream.redis.write(Redis.parse([ 'auth', this.auth ]))
   stream.redis.write(Redis.parse([ 'select', this.db ]))
   return stream
 
