@@ -71,7 +71,7 @@ lpush.write('my-value')
 
 Which you can then pipe redis keys to, and the resulting elements will be piped to stdout.
 
-Check the [examples](https://github.com/tblobaum/redis-stream/tree/master/example) directory for more. However, any [redis command](http://redis.io/commands) can be issued with the same arguments as the command line interface.
+Check the [examples](https://github.com/vibhavy/redis-stream2/tree/master/example) directory for more. However, any [redis command](http://redis.io/commands) can be issued with the same arguments as the command line interface.
 
 ## Other methods
 
