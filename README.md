@@ -1,6 +1,6 @@
-# redis-stream
+# Note
 
-This Package is a fork of github project "redis-stream". The main motive behind creating this package was to add the feature to connect cloud redis (currently tested with Azure), which was not availble in the original package.
+This Package is a fork of github project [redis-stream](https://github.com/tblobaum/redis-stream). The motive behind creating this package was to add the feature to connect cloud redis (currently tested with Azure), which was not availble in the original package.
 
 # redis-stream
 
