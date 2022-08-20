@@ -108,7 +108,7 @@ stream.end()
 
 # Install
 
-`npm install redis-stream`
+`npm install redis-stream2`
 
 # License
 
